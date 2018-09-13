@@ -82,6 +82,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuConsultas.setText("Consultas");
 
         jMenuItemConsuClientes.setText("Clientes");
+        jMenuItemConsuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsuClientesActionPerformed(evt);
+            }
+        });
         jMenuConsultas.add(jMenuItemConsuClientes);
 
         jMenuItemConsuProdutos.setText("Produtos");
@@ -139,6 +144,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(634, 451));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemConsuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsuClientesActionPerformed
+        new FormCliente().setVisible(true);
+    }//GEN-LAST:event_jMenuItemConsuClientesActionPerformed
 
     /**
      * @param args the command line arguments

@@ -151,7 +151,9 @@ public class Form1 extends javax.swing.JFrame {
         if(user.validarMatricula(matricula)){
             if(user.validarSenha(senha)){
                 if(user.efetuarLogin(matricula, senha)){
-                    lbMensagem.setText("Login efetuado com sucesso!");
+                   // lbMensagem.setText("Login efetuado com sucesso!");
+                   new FormPrincipal().setVisible(true);
+                   this.dispose();
                 }
                 else{
                     lbMensagem.setText("Login incorreto!");
