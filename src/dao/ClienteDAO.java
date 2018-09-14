@@ -6,8 +6,9 @@
 package dao;
 
 import classes.Cliente;
-import java.awt.List;
 import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -28,12 +29,32 @@ public class ClienteDAO {
     
     public void removerCliente(String cpf){
         
+        Cliente cli = this.buscarCliente(cpf);
+        if(cli != null){
+            lista.remove(cli);
+        }
     }
     
    public void alterarCliente(Cliente cliente){
+       
+   //    Cliente cli = buscarCliente(cliente.getCpf());
+     //  int ind = lista.indexOf(cli);
+      // lista.set(ind, cliente);
     }
     
     public Cliente buscarCliente(String cpf){
-        return null;
+        
+        Cliente cli = null;
+        for(Cliente cliente: lista){
+           // if(cliente.getCpf == cpf)
+             //       cli = cliente;
+            
+        }
+        
+        return cli;
+    }
+    
+    public List<Cliente> todosClientes(){
+        return lista;
     }
 }

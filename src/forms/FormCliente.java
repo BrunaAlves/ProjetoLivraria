@@ -16,6 +16,46 @@ public class FormCliente extends javax.swing.JFrame {
      */
     public FormCliente() {
         initComponents();
+        //no botao Cadastrar
+        
+        /*
+            //Criando o objeto
+            Cliente cliente = new Cliente();
+        
+            //pegar os dados da tela e inserir no objeto
+            cliente.setCpf(tfCpf.getText());
+            cliente.setNome(tfNome.getText());
+            .
+            .
+            .
+            continua...
+        */
+        
+        
+        /*
+         //salvar na base de dados
+            FormPrincipal.daoCliente.adicionarCliente(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente ", JOptionPane.INFORMATION_MESSAGE);
+        
+        */
+        
+        //Criando um método limpar
+        /*
+            private void limpar(){
+                tfNome.setText("");
+                tfCpf.setText("");
+                .
+                .
+                .
+                continua...
+                bgEstado.clearSelection(); 
+                cbEstado.setSelectedIndex(-1);
+                tfCpf.requestFocus();
+        
+                abas.setSelectedIndex(0);
+            }
+        */
+        
     }
 
     /**

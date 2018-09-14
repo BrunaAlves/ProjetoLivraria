@@ -10,6 +10,6 @@ package classes;
  *
  * @author alunoces
  */
-class Cliente {
+public class Cliente {
     
 }
