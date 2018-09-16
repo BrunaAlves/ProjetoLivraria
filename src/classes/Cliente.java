@@ -5,6 +5,8 @@
  */
 package classes;
 
+import classes.Endereco;
+
 
 /**
  *
@@ -16,6 +18,7 @@ public class Cliente {
     private String estadocivil;
     private String telefone;
     private String email;
+    private Endereco endereco;
 
     public Cliente(String cpf, String nome, String estadocivil, String telefone, String email) {
         this.cpf = cpf;
@@ -26,6 +29,7 @@ public class Cliente {
     }
 
     public Cliente() {
+        endereco = new Endereco();
     }
 
     public String getCpf() {
@@ -68,6 +72,15 @@ public class Cliente {
         this.email = email;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
+    
     @Override
     public String toString() {
         return "Cliente{" + "cpf=" + cpf + ", nome=" + nome + ", estadocivil=" + estadocivil + ", telefone=" + telefone + ", email=" + email + '}';
