@@ -23,8 +23,7 @@ public class ClienteDAO {
     }
     
     public void adicionarCliente(Cliente cliente){
-        lista.add(cliente);
-        
+        lista.add(cliente);       
     }
     
     public void removerCliente(String cpf){
@@ -37,18 +36,17 @@ public class ClienteDAO {
     
    public void alterarCliente(Cliente cliente){
        
-   //    Cliente cli = buscarCliente(cliente.getCpf());
-     //  int ind = lista.indexOf(cli);
-      // lista.set(ind, cliente);
+        Cliente cli = buscarCliente(cliente.getCpf());
+        int ind = lista.indexOf(cli);
+        lista.set(ind, cliente);
     }
     
     public Cliente buscarCliente(String cpf){
         
         Cliente cli = null;
         for(Cliente cliente: lista){
-           // if(cliente.getCpf == cpf)
-             //       cli = cliente;
-            
+            if(cliente.getCpf() == cpf)
+                cli = cliente;
         }
         
         return cli;
