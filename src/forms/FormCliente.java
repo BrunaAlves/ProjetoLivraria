@@ -5,6 +5,10 @@
  */
 package forms;
 
+import classes.Cliente;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alunoces
@@ -294,7 +298,6 @@ public class FormCliente extends javax.swing.JFrame {
         tbDadosCliente.addTab("Endereço Completo", pEnderecoCompleto);
 
         btCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btCadastrar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icIncluirCliente.png")); // NOI18N
         btCadastrar.setText("Cadastrar");
         btCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,7 +306,6 @@ public class FormCliente extends javax.swing.JFrame {
         });
 
         jAtualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jAtualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icAtualizar2.png")); // NOI18N
         jAtualizar.setText("Atualizar");
         jAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,11 +314,9 @@ public class FormCliente extends javax.swing.JFrame {
         });
 
         jLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLimpar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icLimpar.png")); // NOI18N
         jLimpar.setText("Limpar");
 
         jSair.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icSair.png")); // NOI18N
         jSair.setText("Sair");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -381,7 +381,17 @@ public class FormCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        // TODO add your handling code here:
+         Cliente cliente = new Cliente();
+        
+        //pegar os dados da tela e inserir no objeto
+        cliente.setCpf(tfCpf.getText());
+        cliente.setNome(tfNomeCompleto.getText());
+        cliente.setEstadocivil(buttonGroup1.getSelection().getActionCommand());     
+
+        
+        FormPrincipal.daoCliente.adicionarCliente(cliente);
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente ", JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void jAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtualizarActionPerformed
@@ -393,7 +403,19 @@ public class FormCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTelefoneActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        // TODO add your handling code here:
+         String cpf = tfCpf.getText();
+        
+        Cliente cliente = FormPrincipal.daoCliente.buscarCliente(cpf);
+        
+        if(cpf != null){
+            tfNomeCompleto.setText(cliente.getNome());
+         //   tbDadosCliente.tfTelefone.setText(cliente.getTelefone());
+            tfEmail.setText(cliente.getEmail());
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+        }
     }//GEN-LAST:event_btBuscarActionPerformed
 
     /**
