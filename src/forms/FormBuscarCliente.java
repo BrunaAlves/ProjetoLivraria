@@ -5,6 +5,10 @@
  */
 package forms;
 
+import classes.Cliente;
+import dao.ClienteDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Bruna
@@ -16,6 +20,7 @@ public class FormBuscarCliente extends javax.swing.JFrame {
      */
     public FormBuscarCliente() {
         initComponents();
+        btExcluir.setEnabled(false);
     }
 
     /**
@@ -48,19 +53,21 @@ public class FormBuscarCliente extends javax.swing.JFrame {
         });
 
         btBuscarCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btBuscarCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icBuscar.png")); // NOI18N
         btBuscarCliente.setText("Buscar Cliente");
+        btBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarClienteActionPerformed(evt);
+            }
+        });
 
         taDadosCliente.setColumns(20);
         taDadosCliente.setRows(5);
         jScrollPane1.setViewportView(taDadosCliente);
 
         btExcluir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btExcluir.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icExcluir.png")); // NOI18N
         btExcluir.setText("Excluir");
 
         btSair.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icSair.png")); // NOI18N
         btSair.setText("Sair");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,6 +119,20 @@ public class FormBuscarCliente extends javax.swing.JFrame {
     private void tfCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCpfActionPerformed
+
+    private void btBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarClienteActionPerformed
+        String cpf = tfCpf.getText();
+        
+        Cliente cliente = FormPrincipal.daoCliente.buscarCliente(cpf);
+        
+        if(cpf != null){
+            taDadosCliente.setText(cliente.toString());
+            btExcluir.setEnabled(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+        }
+    }//GEN-LAST:event_btBuscarClienteActionPerformed
 
     /**
      * @param args the command line arguments

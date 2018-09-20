@@ -5,6 +5,10 @@
  */
 package forms;
 
+import classes.Cliente;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alunoces
@@ -376,7 +380,17 @@ public class FormCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        // TODO add your handling code here:
+         Cliente cliente = new Cliente();
+        
+        //pegar os dados da tela e inserir no objeto
+        cliente.setCpf(tfCpf.getText());
+        cliente.setNome(tfNomeCompleto.getText());
+        cliente.setEstadocivil(buttonGroup1.getSelection().getActionCommand());     
+
+        
+        FormPrincipal.daoCliente.adicionarCliente(cliente);
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente ", JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void jAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtualizarActionPerformed
