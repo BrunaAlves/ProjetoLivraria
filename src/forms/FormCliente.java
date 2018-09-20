@@ -76,7 +76,7 @@ public class FormCliente extends javax.swing.JFrame {
         tfNomeCompleto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btBusvar = new javax.swing.JButton();
+        btBuscar = new javax.swing.JButton();
         tbDadosCliente = new javax.swing.JTabbedPane();
         pDadosPessoais = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -116,7 +116,12 @@ public class FormCliente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Nome Completo:");
 
-        btBusvar.setText("Buscar");
+        btBuscar.setText("Buscar");
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Telefone:");
@@ -293,7 +298,6 @@ public class FormCliente extends javax.swing.JFrame {
         tbDadosCliente.addTab("Endereço Completo", pEnderecoCompleto);
 
         btCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btCadastrar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icIncluirCliente.png")); // NOI18N
         btCadastrar.setText("Cadastrar");
         btCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,7 +306,6 @@ public class FormCliente extends javax.swing.JFrame {
         });
 
         jAtualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jAtualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icAtualizar2.png")); // NOI18N
         jAtualizar.setText("Atualizar");
         jAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,11 +314,9 @@ public class FormCliente extends javax.swing.JFrame {
         });
 
         jLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLimpar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icLimpar.png")); // NOI18N
         jLimpar.setText("Limpar");
 
         jSair.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icSair.png")); // NOI18N
         jSair.setText("Sair");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -335,7 +336,7 @@ public class FormCliente extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(tfNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(btBusvar))
+                        .addComponent(btBuscar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(tbDadosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -359,7 +360,7 @@ public class FormCliente extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btBusvar)
+                    .addComponent(btBuscar)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,6 +402,22 @@ public class FormCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTelefoneActionPerformed
 
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+         String cpf = tfCpf.getText();
+        
+        Cliente cliente = FormPrincipal.daoCliente.buscarCliente(cpf);
+        
+        if(cpf != null){
+            tfNomeCompleto.setText(cliente.getNome());
+         //   tbDadosCliente.tfTelefone.setText(cliente.getTelefone());
+            tfEmail.setText(cliente.getEmail());
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+        }
+    }//GEN-LAST:event_btBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -437,7 +454,7 @@ public class FormCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btBusvar;
+    private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCadastrar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jAtualizar;

@@ -41,7 +41,7 @@
                       <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
                       <Component id="tfNomeCompleto" min="-2" pref="306" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="btBusvar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btBuscar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
@@ -72,7 +72,7 @@
               </Group>
               <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btBusvar" min="-2" max="-2" attributes="0"/>
+                  <Component id="btBuscar" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -119,10 +119,13 @@
         <Property name="text" type="java.lang.String" value="Nome Completo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btBusvar">
+    <Component class="javax.swing.JButton" name="btBuscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="tbDadosCliente">
 
