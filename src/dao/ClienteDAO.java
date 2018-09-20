@@ -48,7 +48,6 @@ public class ClienteDAO {
             if(cliente.getCpf() == cpf)
                 cli = cliente;
         }
-        
         return cli;
     }
     
