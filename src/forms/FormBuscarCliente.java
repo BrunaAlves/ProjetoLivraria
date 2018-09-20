@@ -66,6 +66,11 @@ public class FormBuscarCliente extends javax.swing.JFrame {
 
         btExcluir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btExcluir.setText("Excluir");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
 
         btSair.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btSair.setText("Sair");
@@ -133,6 +138,16 @@ public class FormBuscarCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
         }
     }//GEN-LAST:event_btBuscarClienteActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        FormPrincipal.daoCliente.removerCliente(tfCpf.getText());
+        
+        btExcluir.setEnabled(false);
+        tfCpf.setText("");
+        taDadosCliente.setText("");
+        
+        tfCpf.requestFocus();
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     /**
      * @param args the command line arguments
