@@ -6,8 +6,10 @@
 package forms;
 
 import classes.Cliente;
+import java.util.Enumeration;
 import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -98,9 +100,9 @@ public class FormCliente extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         tfCidade = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        tfEstado = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         tfCep = new javax.swing.JTextField();
+        cbEstado = new javax.swing.JComboBox<>();
         btCadastrar = new javax.swing.JButton();
         jAtualizar = new javax.swing.JButton();
         jLimpar = new javax.swing.JButton();
@@ -245,6 +247,8 @@ public class FormCliente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("CEP:");
 
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MG", "SP", "RJ", "ES", "AM", "AC" }));
+
         javax.swing.GroupLayout pEnderecoCompletoLayout = new javax.swing.GroupLayout(pEnderecoCompleto);
         pEnderecoCompleto.setLayout(pEnderecoCompletoLayout);
         pEnderecoCompletoLayout.setHorizontalGroup(
@@ -258,9 +262,8 @@ public class FormCliente extends javax.swing.JFrame {
                         .addGroup(pEnderecoCompletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel9)
-                            .addGroup(pEnderecoCompletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tfEstado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                                .addComponent(tfComplemento, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(tfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54)
                         .addGroup(pEnderecoCompletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel10)
@@ -289,10 +292,10 @@ public class FormCliente extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pEnderecoCompletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pEnderecoCompletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         tbDadosCliente.addTab("Endereço Completo", pEnderecoCompleto);
@@ -386,6 +389,10 @@ public class FormCliente extends javax.swing.JFrame {
         //pegar os dados da tela e inserir no objeto
         cliente.setCpf(tfCpf.getText());
         cliente.setNome(tfNomeCompleto.getText());
+        cliente.setTelefone(tfTelefone.getText());
+        cliente.setEmail(tfEmail.getText());
+        cliente.getEndereco().setEstado(cbEstado.getSelectedItem().toString());
+       
         cliente.setEstadocivil(buttonGroup1.getSelection().getActionCommand());     
 
         
@@ -409,9 +416,24 @@ public class FormCliente extends javax.swing.JFrame {
         
         if(cpf != null){
             tfNomeCompleto.setText(cliente.getNome());
-         //   tbDadosCliente.tfTelefone.setText(cliente.getTelefone());
+           tfTelefone.setText(cliente.getTelefone());
+            tfComplemento.setText(cliente.getEndereco().getComplemento());
             tfEmail.setText(cliente.getEmail());
             
+
+            for(int i = 0; i < cbEstado.getItemCount(); i++)
+            {
+                if (cbEstado.getItemAt(i).equals(cliente.getEndereco().getEstado()));
+                cbEstado.setSelectedIndex(i);
+            }
+            
+            JRadioButton radio;
+            Enumeration jr = buttonGroup1.getElements();
+            while (jr.hasMoreElements() ) {
+                radio = (JRadioButton) jr.nextElement();
+                if (radio.getText().equals(cliente.getEstadocivil()))
+                    radio.setSelected(true);
+            }
         }
         else{
             JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
@@ -457,6 +479,7 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCadastrar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JButton jAtualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -484,7 +507,6 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JTextField tfComplemento;
     private javax.swing.JTextField tfCpf;
     private javax.swing.JTextField tfEmail;
-    private javax.swing.JTextField tfEstado;
     private javax.swing.JTextField tfLogradouro;
     private javax.swing.JTextField tfNomeCompleto;
     private javax.swing.JTextField tfTelefone;
