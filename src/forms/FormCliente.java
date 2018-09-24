@@ -285,7 +285,7 @@ public class FormCliente extends javax.swing.JFrame {
         });
 
         jLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/forms/icLimpar.png"))); // NOI18N
+        jLimpar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icLimpar.png")); // NOI18N
         jLimpar.setText("Limpar");
         jLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,6 +296,11 @@ public class FormCliente extends javax.swing.JFrame {
         jSair.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruna\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icSair.png")); // NOI18N
         jSair.setText("Sair");
+        jSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -439,6 +444,10 @@ public class FormCliente extends javax.swing.JFrame {
     private void jLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimparActionPerformed
         limpar();
     }//GEN-LAST:event_jLimparActionPerformed
+
+    private void jSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jSairActionPerformed
     
     private void limpar(){
                 tfNomeCompleto.setText("");
