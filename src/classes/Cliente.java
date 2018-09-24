@@ -83,7 +83,18 @@ public class Cliente {
     
     @Override
     public String toString() {
-        return "Cliente{" + "cpf=" + cpf + ", nome=" + nome + ", estadocivil=" + estadocivil + ", telefone=" + telefone + ", email=" + email + '}';
+        return "Cliente{" 
+                + "cpf=" + cpf 
+                + ", nome=" + nome 
+                + ", estadocivil=" + estadocivil 
+                + ", telefone=" + telefone 
+                + ", email=" + email 
+                + ", Logradouro=" + getEndereco().getLogradouro()
+                + ", Complemento=" + getEndereco().getComplemento()
+                + ", Cidade=" + getEndereco().getCidade()
+                + ", Estado=" + getEndereco().getEstado()
+                + ", CEP=" + getEndereco().getCep()                
+                + '}';
     }
     
     
