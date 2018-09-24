@@ -415,8 +415,9 @@ public class FormCliente extends javax.swing.JFrame {
 
             for(int i = 0; i < cbEstado.getItemCount(); i++) // Seleciona a opção do combobox
             {
-                if (cbEstado.getItemAt(i).equals(cliente.getEndereco().getEstado()));
-                cbEstado.setSelectedIndex(i);
+                if (cbEstado.getItemAt(i).equals(cliente.getEndereco().getEstado())){
+                    cbEstado.setSelectedIndex(i);
+                }
             }
             
             JRadioButton radio; //Selecionar a opção do botao de rádio
