@@ -21,47 +21,7 @@ public class FormCliente extends javax.swing.JFrame {
      * Creates new form FormCliente
      */
     public FormCliente() {
-        initComponents();
-        //no botao Cadastrar
-        
-        /*
-            //Criando o objeto
-            Cliente cliente = new Cliente();
-        
-            //pegar os dados da tela e inserir no objeto
-            cliente.setCpf(tfCpf.getText());
-            cliente.setNome(tfNome.getText());
-            .
-            .
-            .
-            continua...
-        */
-        
-        
-        /*
-         //salvar na base de dados
-            FormPrincipal.daoCliente.adicionarCliente(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente ", JOptionPane.INFORMATION_MESSAGE);
-        
-        */
-        
-        //Criando um método limpar
-        /*
-            private void limpar(){
-                tfNome.setText("");
-                tfCpf.setText("");
-                .
-                .
-                .
-                continua...
-                bgEstado.clearSelection(); 
-                cbEstado.setSelectedIndex(-1);
-                tfCpf.requestFocus();
-        
-                abas.setSelectedIndex(0);
-            }
-        */
-        
+        initComponents();        
     }
 
     /**
@@ -146,22 +106,27 @@ public class FormCliente extends javax.swing.JFrame {
         buttonGroup1.add(rbSolteiro);
         rbSolteiro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         rbSolteiro.setText("Solteiro");
+        rbSolteiro.setActionCommand("Solteiro");
 
         buttonGroup1.add(rbCasado);
         rbCasado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         rbCasado.setText("Casado");
+        rbCasado.setActionCommand("Casado");
 
         buttonGroup1.add(rbDivorciado);
         rbDivorciado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         rbDivorciado.setText("Divorciado");
+        rbDivorciado.setActionCommand("Divorciado");
 
         buttonGroup1.add(rbUniaoEstavel);
         rbUniaoEstavel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         rbUniaoEstavel.setText("União Estável");
+        rbUniaoEstavel.setActionCommand("União Estável");
 
         buttonGroup1.add(rbViuvo);
         rbViuvo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         rbViuvo.setText("Viúvo");
+        rbViuvo.setActionCommand("Viúvo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -318,6 +283,11 @@ public class FormCliente extends javax.swing.JFrame {
 
         jLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLimpar.setText("Limpar");
+        jLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLimparActionPerformed(evt);
+            }
+        });
 
         jSair.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jSair.setText("Sair");
@@ -391,14 +361,17 @@ public class FormCliente extends javax.swing.JFrame {
         cliente.setNome(tfNomeCompleto.getText());
         cliente.setTelefone(tfTelefone.getText());
         cliente.setEmail(tfEmail.getText());
+        cliente.setEstadocivil(buttonGroup1.getSelection().getActionCommand());
+        cliente.getEndereco().setLogradouro(tfLogradouro.getText());
+        cliente.getEndereco().setComplemento(tfComplemento.getText());
+        cliente.getEndereco().setCidade(tfCidade.getText());
         cliente.getEndereco().setEstado(cbEstado.getSelectedItem().toString());
-       
-        cliente.setEstadocivil(buttonGroup1.getSelection().getActionCommand());     
-
+        cliente.getEndereco().setCep(tfCep.getText());
         
         FormPrincipal.daoCliente.adicionarCliente(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente ", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
         
+        limpar();
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void jAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtualizarActionPerformed
@@ -410,24 +383,26 @@ public class FormCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTelefoneActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-         String cpf = tfCpf.getText();
+        String cpf = tfCpf.getText();
         
         Cliente cliente = FormPrincipal.daoCliente.buscarCliente(cpf);
         
         if(cpf != null){
             tfNomeCompleto.setText(cliente.getNome());
-           tfTelefone.setText(cliente.getTelefone());
-            tfComplemento.setText(cliente.getEndereco().getComplemento());
+            tfTelefone.setText(cliente.getTelefone());
             tfEmail.setText(cliente.getEmail());
-            
+            tfLogradouro.setText(cliente.getEndereco().getLogradouro());
+            tfComplemento.setText(cliente.getEndereco().getComplemento());
+            tfCidade.setText(cliente.getEndereco().getCidade());
+            tfCep.setText(cliente.getEndereco().getCep());
 
-            for(int i = 0; i < cbEstado.getItemCount(); i++)
+            for(int i = 0; i < cbEstado.getItemCount(); i++) // Seleciona a opção do combobox
             {
                 if (cbEstado.getItemAt(i).equals(cliente.getEndereco().getEstado()));
                 cbEstado.setSelectedIndex(i);
             }
             
-            JRadioButton radio;
+            JRadioButton radio; //Selecionar a opção do botao de rádio
             Enumeration jr = buttonGroup1.getElements();
             while (jr.hasMoreElements() ) {
                 radio = (JRadioButton) jr.nextElement();
@@ -440,6 +415,27 @@ public class FormCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
+    private void jLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_jLimparActionPerformed
+    
+    private void limpar(){
+                tfNomeCompleto.setText("");
+                tfCpf.setText("");
+                tfTelefone.setText("");
+                tfEmail.setText("");;
+                tfLogradouro.setText("");
+                tfComplemento.setText("");
+                tfCidade.setText("");
+                tfCep.setText("");
+                buttonGroup1.clearSelection(); 
+                cbEstado.setSelectedIndex(-1);
+                
+                tfCpf.requestFocus();
+        
+                tbDadosCliente.setSelectedIndex(0);
+    }
+    
     /**
      * @param args the command line arguments
      */
