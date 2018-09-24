@@ -212,7 +212,7 @@ public class FormCliente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("CEP:");
 
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MG", "SP", "RJ", "ES", "AM", "AC" }));
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MG", "SP", "RJ", "ES", "AM", "AC", "AL", "BA", "CE", "MS", "MT" }));
 
         javax.swing.GroupLayout pEnderecoCompletoLayout = new javax.swing.GroupLayout(pEnderecoCompleto);
         pEnderecoCompleto.setLayout(pEnderecoCompletoLayout);
@@ -375,7 +375,24 @@ public class FormCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void jAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtualizarActionPerformed
-        // TODO add your handling code here:
+        Cliente cliente = new Cliente();
+        
+        //pegar os dados da tela e inserir no objeto
+        cliente.setCpf(tfCpf.getText());
+        cliente.setNome(tfNomeCompleto.getText());
+        cliente.setTelefone(tfTelefone.getText());
+        cliente.setEmail(tfEmail.getText());
+        cliente.setEstadocivil(buttonGroup1.getSelection().getActionCommand());
+        cliente.getEndereco().setLogradouro(tfLogradouro.getText());
+        cliente.getEndereco().setComplemento(tfComplemento.getText());
+        cliente.getEndereco().setCidade(tfCidade.getText());
+        cliente.getEndereco().setEstado(cbEstado.getSelectedItem().toString());
+        cliente.getEndereco().setCep(tfCep.getText());
+        
+        FormPrincipal.daoCliente.adicionarCliente(cliente);
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
+        
+        limpar();
     }//GEN-LAST:event_jAtualizarActionPerformed
 
     private void tfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefoneActionPerformed
