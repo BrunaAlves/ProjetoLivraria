@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.util.Date;
+
 /**
  *código, titulo, fornecedor (editora), quantidade em estoque, valor unitário e data de publicação.
  * @author bruna
@@ -15,12 +17,12 @@ public class Livro {
     private String fornecedor;
     private int quantidadeEstoque;
     private float valorUnitario;
-    private String dataPublicacao;
+    private Date dataPublicacao;
 
     public Livro() {
     }
 
-    public Livro(int codigo, String titulo, String fornecedor, int quantidadeEstoque, float valorUnitario, String dataPublicacao) {
+    public Livro(int codigo, String titulo, String fornecedor, int quantidadeEstoque, float valorUnitario, Date dataPublicacao) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.fornecedor = fornecedor;
@@ -74,11 +76,11 @@ public class Livro {
         this.valorUnitario = valorUnitario;
     }
 
-    public String getDataPublicacao() {
+    public Date getDataPublicacao() {
         return dataPublicacao;
     }
 
-    public void setDataPublicacao(String dataPublicacao) {
+    public void setDataPublicacao(Date dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
     

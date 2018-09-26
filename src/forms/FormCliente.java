@@ -398,7 +398,7 @@ public class FormCliente extends javax.swing.JFrame {
         cliente.getEndereco().setCep(tfCep.getText());
         
         FormPrincipal.daoCliente.adicionarCliente(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucess", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
         
         limpar();
     }//GEN-LAST:event_jAtualizarActionPerformed

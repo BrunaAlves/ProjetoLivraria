@@ -6,6 +6,7 @@
 package forms;
 
 import dao.ClienteDAO;
+import dao.LivroDAO;
 /**
  *
  * @author alunoces
@@ -13,6 +14,7 @@ import dao.ClienteDAO;
 public class FormPrincipal extends javax.swing.JFrame {
 
     public static ClienteDAO daoCliente = null;
+    public static LivroDAO daoLivro = null;
     /**
      * Creates new form FormPrincipal
      */
@@ -21,6 +23,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         
         daoCliente = new ClienteDAO();
+        daoLivro = new LivroDAO();
     }
 
     /**
@@ -79,6 +82,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuCadastros.add(jMenuItemCadCliente);
 
         jMenuItemCadProdutos.setText("Produtos");
+        jMenuItemCadProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadProdutosActionPerformed(evt);
+            }
+        });
         jMenuCadastros.add(jMenuItemCadProdutos);
         jMenuCadastros.add(jSeparator1);
 
@@ -161,6 +169,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void jMenuItemCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadClienteActionPerformed
         new FormCliente().setVisible(true);
     }//GEN-LAST:event_jMenuItemCadClienteActionPerformed
+
+    private void jMenuItemCadProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadProdutosActionPerformed
+        new FormLivro().setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadProdutosActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,13 @@
  */
 package forms;
 
+import classes.Livro;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author bruna
@@ -36,7 +43,7 @@ public class FormLivro extends javax.swing.JFrame {
         tfCodigo = new javax.swing.JTextField();
         tfTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbFornecedores = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -44,31 +51,51 @@ public class FormLivro extends javax.swing.JFrame {
         tfQuantidadeEstoque = new javax.swing.JTextField();
         tfDataPublicacao = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btCadastrar.setIcon(new javax.swing.ImageIcon("C:\\Users\\bruni\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icCadlivro.png")); // NOI18N
+        btCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icCadlivro.png"))); // NOI18N
         btCadastrar.setText("Cadastrar");
         btCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCadastrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarActionPerformed(evt);
+            }
+        });
 
         btAtualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btAtualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\bruni\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icAtualizar.png")); // NOI18N
+        btAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icAtualizar.png"))); // NOI18N
         btAtualizar.setText("Atualizar");
         btAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btAtualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarActionPerformed(evt);
+            }
+        });
 
         btCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\bruni\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\cancelar.png")); // NOI18N
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         btCancelar.setText("Cancelar");
         btCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
 
         btSair.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\bruni\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\imagens\\icSair.png")); // NOI18N
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icSair.png"))); // NOI18N
         btSair.setText("Sair");
         btSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Código:");
@@ -79,7 +106,7 @@ public class FormLivro extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Fornecedores:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Editora Melhoramento", "Rocco", "Buqui", "Editora Saraiva", "Gulliver Editora" }));
+        cbFornecedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Editora Melhoramento", "Rocco", "Buqui", "Editora Saraiva", "Gulliver Editora" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Valor Unitário:");
@@ -123,20 +150,20 @@ public class FormLivro extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfValorUnitario))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfQuantidadeEstoque))
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfDataPublicacao))))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(tfQuantidadeEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(tfDataPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -160,7 +187,7 @@ public class FormLivro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -171,11 +198,68 @@ public class FormLivro extends javax.swing.JFrame {
                     .addComponent(tfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfQuantidadeEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfDataPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        Livro livro = new Livro();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        livro.setCodigo(Integer.parseInt(tfCodigo.getText()));
+        livro.setTitulo(tfTitulo.getText());
+        livro.setFornecedor(cbFornecedores.getSelectedItem().toString());
+        livro.setValorUnitario(Float.parseFloat(tfValorUnitario.getText()));
+        livro.setQuantidadeEstoque(Integer.parseInt(tfQuantidadeEstoque.getText()));
+
+        
+        try {
+            livro.setDataPublicacao(sdf.parse(tfDataPublicacao.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(FormLivro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        tfCodigo.setText("");
+        tfTitulo.setText("");
+        cbFornecedores.setSelectedIndex(-1);
+        tfValorUnitario.setText("");
+        tfQuantidadeEstoque.setText("");
+        tfDataPublicacao.setText("");
+        
+        tfCodigo.requestFocus();
+    }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btSairActionPerformed
+
+    private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
+        Livro livro = new Livro();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        livro.setCodigo(Integer.parseInt(tfCodigo.getText()));
+        livro.setTitulo(tfTitulo.getText());
+        livro.setFornecedor(cbFornecedores.getSelectedItem().toString());
+        livro.setValorUnitario(Float.parseFloat(tfValorUnitario.getText()));
+        livro.setQuantidadeEstoque(Integer.parseInt(tfQuantidadeEstoque.getText()));
+
+        
+        try {
+            livro.setDataPublicacao(sdf.parse(tfDataPublicacao.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(FormLivro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(livro.toString());
+        JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,7 +301,7 @@ public class FormLivro extends javax.swing.JFrame {
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btSair;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbFornecedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
