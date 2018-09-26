@@ -50,6 +50,12 @@ public class FormLivro extends javax.swing.JFrame {
         tfValorUnitario = new javax.swing.JTextField();
         tfQuantidadeEstoque = new javax.swing.JTextField();
         tfDataPublicacao = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data = new javax.swing.text.MaskFormatter("##/##/####");
+
+            tfDataPublicacao = new javax.swing.JFormattedTextField(data);
+        }catch(Exception e){
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -116,8 +122,6 @@ public class FormLivro extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Data de Publicação:");
-
-        tfDataPublicacao.setText("  /  /");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,6 +226,7 @@ public class FormLivro extends javax.swing.JFrame {
             Logger.getLogger(FormLivro.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        FormPrincipal.daoLivro.adicionarLivro(livro);
         JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btCadastrarActionPerformed
 
@@ -257,7 +262,7 @@ public class FormLivro extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(FormLivro.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(livro.toString());
+        FormPrincipal.daoLivro.adicionarLivro(livro);
         JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!", "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btAtualizarActionPerformed
 

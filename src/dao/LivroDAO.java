@@ -29,12 +29,13 @@ public class LivroDAO {
         Livro liv = null;
         
         for(Livro livro: lista){
-            if(livro.getCodigo()== codigo){
+            if(livro.getCodigo() == codigo){
                 liv = livro;
             }
         }
         
         return liv;
+        
     }
     
     public void removerLivro(int codigo){

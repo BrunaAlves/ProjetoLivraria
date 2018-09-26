@@ -5,6 +5,7 @@
  */
 package classes;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,7 +19,9 @@ public class Livro {
     private int quantidadeEstoque;
     private float valorUnitario;
     private Date dataPublicacao;
-
+    
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    
     public Livro() {
     }
 
@@ -33,7 +36,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Livro{" + "codigo=" + codigo + ", titulo=" + titulo + ", fornecedor=" + fornecedor + ", quantidadeEstoque=" + quantidadeEstoque + ", valorUnitario=" + valorUnitario + ", dataPublicacao=" + dataPublicacao + '}';
+        return "Livro{" + "codigo=" + codigo + ", titulo=" + titulo + ", fornecedor=" + fornecedor + ", quantidadeEstoque=" + quantidadeEstoque + ", valorUnitario=" + valorUnitario + ", dataPublicacao=" + sdf.format(dataPublicacao) + '}';
     }
 
     public int getCodigo() {

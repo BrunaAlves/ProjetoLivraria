@@ -2,6 +2,14 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+
+//Aceitar somente numero. Ir em propriedade do TextField, > Codigo> Código de pós criação
+try{
+ javax.swing.text.MaskFormatter data = new javax.swing.text.MaskFormatter("##/##/####");
+
+ tfDataPublicacao = new javax.swing.JFormattedTextField(data);
+ }catch(Exception e){
+}
  */
 package forms;
 
@@ -107,6 +115,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuConsultas.add(jMenuItemConsuClientes);
 
         jMenuItemConsuProdutos.setText("Produtos");
+        jMenuItemConsuProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsuProdutosActionPerformed(evt);
+            }
+        });
         jMenuConsultas.add(jMenuItemConsuProdutos);
 
         jMenuCompras.setText("Compras");
@@ -173,6 +186,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void jMenuItemCadProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadProdutosActionPerformed
         new FormLivro().setVisible(true);
     }//GEN-LAST:event_jMenuItemCadProdutosActionPerformed
+
+    private void jMenuItemConsuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsuProdutosActionPerformed
+        new FormBuscarLivro().setVisible(true);
+    }//GEN-LAST:event_jMenuItemConsuProdutosActionPerformed
 
     /**
      * @param args the command line arguments
