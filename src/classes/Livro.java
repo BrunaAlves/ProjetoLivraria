@@ -10,16 +10,18 @@ package classes;
  * @author bruna
  */
 public class Livro {
+    private int codigo;
     private String titulo;
     private String fornecedor;
-    private String quantidadeEstoque;
-    private String valorUnitario;
+    private int quantidadeEstoque;
+    private float valorUnitario;
     private String dataPublicacao;
 
     public Livro() {
     }
 
-    public Livro(String titulo, String fornecedor, String quantidadeEstoque, String valorUnitario, String dataPublicacao) {
+    public Livro(int codigo, String titulo, String fornecedor, int quantidadeEstoque, float valorUnitario, String dataPublicacao) {
+        this.codigo = codigo;
         this.titulo = titulo;
         this.fornecedor = fornecedor;
         this.quantidadeEstoque = quantidadeEstoque;
@@ -29,7 +31,15 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Livro{" + "titulo=" + titulo + ", fornecedor=" + fornecedor + ", quantidadeEstoque=" + quantidadeEstoque + ", valorUnitario=" + valorUnitario + ", dataPublicacao=" + dataPublicacao + '}';
+        return "Livro{" + "codigo=" + codigo + ", titulo=" + titulo + ", fornecedor=" + fornecedor + ", quantidadeEstoque=" + quantidadeEstoque + ", valorUnitario=" + valorUnitario + ", dataPublicacao=" + dataPublicacao + '}';
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getTitulo() {
@@ -48,19 +58,19 @@ public class Livro {
         this.fornecedor = fornecedor;
     }
 
-    public String getQuantidadeEstoque() {
+    public int getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(String quantidadeEstoque) {
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public String getValorUnitario() {
+    public float getValorUnitario() {
         return valorUnitario;
     }
 
-    public void setValorUnitario(String valorUnitario) {
+    public void setValorUnitario(float valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
