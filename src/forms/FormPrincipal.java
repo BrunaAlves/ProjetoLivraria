@@ -15,6 +15,7 @@ package forms;
 
 import dao.ClienteDAO;
 import dao.LivroDAO;
+//import dao.VendaDAO;
 /**
  *
  * @author alunoces
@@ -23,6 +24,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     public static ClienteDAO daoCliente = null;
     public static LivroDAO daoLivro = null;
+    //public VendaDao daoVenda = null;
     /**
      * Creates new form FormPrincipal
      */
@@ -32,8 +34,82 @@ public class FormPrincipal extends javax.swing.JFrame {
         
         daoCliente = new ClienteDAO();
         daoLivro = new LivroDAO();
+        //daoVenda = new VendaDAO();
     }
-
+    
+    /*adicionar no form de vendas
+    
+        //variaveis globais
+        private Venda venda = null;
+        private Cliente cliente = null;
+        private Livro livro = null;
+        
+        private float soma = 0;
+    
+        //para minipular a tabela cria uma variavel model
+        
+        DefaultTableModel model = null;
+    
+        public FormVenda(){
+            initComponents();
+            venda = new Venda();
+            modelo = (DefaultTableModel)jTable1.getModel();
+        }
+    
+    //EVENTO seleciona a janela>event>Window>WindowOpened. Trazer dandos ja na hora dde selecionar
+        lbNumero.setText(Integer.toString(venda.getNumero()));
+        lbData.setText(venda.getData());
+        
+    //botao buscar
+        cliente = FormPrincipal.daoCliente.buscarCliente()tfCpf;getText());
+    if(cliente != null){
+       lbNome.setText(cliente.getNome());
+       lbEndereco.setText(cliente.getEndereco().getLogradouro());
+        lbTelefone.setText(cliente.getTelefone());
+        lbEmail.setText(cliente.getEmail());
+    }
+    else{
+        JOptionPane.showMessageDialog(null,"Cliente não encontrado!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+        tfCpf.requestFocus();
+    }
+    
+    //botão confirmar
+    venda.setCliente(cliente);
+    btConfirmar.setEnabled(false);
+    
+    //botao Incluir item
+        int quantidade = Integer.parseInt(tfQuantidade.getText());
+        
+        if(quantidade > 0){
+            Item it = new Item(livro);
+            it.setQuantidade(quantidade);
+            it.calcularValorItem();
+    
+            venda.adicionarItem(it);
+            modelo.addRow(new Object[]{livro.getCodigo(), livro.getTitulo....}); //pegar os valores conforme tela do form
+            
+            soma = soma + it.getValoritem();
+            lbTotal.setText("R$"+float.toString(soma));
+        }
+        else(
+           JOptionPane.showMessageDialog(null,"Quantidade inválida!\n Favor preencher um valor maior que 0.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+            tfQuantidade.requestFocus(); 
+        )
+    
+    
+    
+    
+    //limpar a tabela/grid
+         private void limparTabela()
+    {
+        for (int i = jTable1.getRowCount() - 1; i >= 0; --i)
+        {
+                modelo.removeRow(i);
+        }
+    }
+    
+    */
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,7 +266,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void jMenuItemConsuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsuProdutosActionPerformed
         new FormBuscarLivro().setVisible(true);
     }//GEN-LAST:event_jMenuItemConsuProdutosActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */
