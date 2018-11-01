@@ -7,6 +7,8 @@ package forms;
 
 import classes.Livro;
 import dao.LivroDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,13 +39,13 @@ public class FormBuscarLivro extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btBuscar = new javax.swing.JButton();
-        cbBuscarTodos = new java.awt.Checkbox();
         tfCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         taDadosLivro = new javax.swing.JTextArea();
         btEditar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
+        cbBuscarTodos = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,9 +59,6 @@ public class FormBuscarLivro extends javax.swing.JFrame {
                 btBuscarActionPerformed(evt);
             }
         });
-
-        cbBuscarTodos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbBuscarTodos.setLabel("Buscar Todos");
 
         tfCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -79,6 +78,13 @@ public class FormBuscarLivro extends javax.swing.JFrame {
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icSair.png"))); // NOI18N
         btSair.setText("Sair");
 
+        cbBuscarTodos.setText("Buscar Todos");
+        cbBuscarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBuscarTodosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,17 +97,18 @@ public class FormBuscarLivro extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btBuscar)
-                                .addGap(63, 63, 63)
-                                .addComponent(cbBuscarTodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(btEditar)
                                 .addGap(117, 117, 117)
                                 .addComponent(btExcluir)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                        .addComponent(btSair)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                        .addComponent(btSair))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscar)
+                        .addGap(46, 46, 46)
+                        .addComponent(cbBuscarTodos)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,13 +117,12 @@ public class FormBuscarLivro extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btBuscar))
-                    .addComponent(cbBuscarTodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBuscar)
+                    .addComponent(cbBuscarTodos))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,19 +136,42 @@ public class FormBuscarLivro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-
-        if(tfCodigo.getText() != null){
+        taDadosLivro.setText("");
+        
+        if(cbBuscarTodos.isSelected()){
+            tfCodigo.setEnabled(false);
+            List<Livro> lista = FormPrincipal.daoLivro.todosLivros();
+            
+            for(Livro l: lista){
+                taDadosLivro.append(l.toString());
+            }
+        }
+        else{
+            if(tfCodigo.getText() != null){
             int codigo = Integer.parseInt(tfCodigo.getText());
             Livro livro = FormPrincipal.daoLivro.buscarLivro(codigo);
             //   System.out.println("PASSOU");
             taDadosLivro.setText(livro.toString());
             btEditar.setEnabled(true);
             btExcluir.setEnabled(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Livro não encontrado!");
+            }
+        }
+    
+    }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void cbBuscarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBuscarTodosActionPerformed
+        if(cbBuscarTodos.isSelected()){
+            tfCodigo.setEnabled(false);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Livro não encontrado!");
+            tfCodigo.setEnabled(true);
+            tfCodigo.requestFocus();
+            tfCodigo.setText("");
         }
-    }//GEN-LAST:event_btBuscarActionPerformed
+    }//GEN-LAST:event_cbBuscarTodosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,7 +213,7 @@ public class FormBuscarLivro extends javax.swing.JFrame {
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btSair;
-    private java.awt.Checkbox cbBuscarTodos;
+    private javax.swing.JCheckBox cbBuscarTodos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea taDadosLivro;
