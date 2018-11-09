@@ -5,6 +5,14 @@
  */
 package forms;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alunoces
@@ -125,11 +133,63 @@ public class FormEmitirNotaFiscal extends javax.swing.JFrame {
     }//GEN-LAST:event_btSairActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        // TODO add your handling code here:
+       /* Venda vd = FormPrincipal.daoVenda(Integer.parseInt(tfVenda.getText()));
+        if(vd != null){
+            
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Venda não encontrada!\nPor favor, digite novamente!", "Atenção", JOptionPane.ERROR_MESSAGE);
+        */
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void btEmitirNotaFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmitirNotaFiscalActionPerformed
-        // TODO add your handling code here:
+        // COLOCAR NO VENDA.JAVA
+        
+        /*
+     //para gerar um valor statico       
+    public int proximo(){
+
+            return lista.size()+1;
+    }
+            
+    Venda.java....
+ tirar o numero que esta como static e o numero++
+
+
+
+FormVenda.java
+
+
+formWindowOpened()
+
+lnNumero.setText(Integer.toString(FormPrincipal.daoVenda.proximo()))    
+        */
+    File arq = new File("C:\\Users\\alunoces\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\notasfiscais\\NotaFiscal " + 1/*tfVenda.getText()*/ + ".txt");  
+    if(!arq.exists()){
+        try {
+            arq.createNewFile();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possivel criar o arquivo!", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }               
+    }
+        try {
+            FileWriter fw = new FileWriter(arq);
+            BufferedWriter bw = new BufferedWriter(fw);
+           // bw.write(taDados.getText());
+           /*
+           String vet[] = taDados.getText.split("\n");
+           
+           for(String linha: vet){
+               bw.write(linha);
+               bw.newLine();
+           } */
+           bw.close();
+           fw.close();
+           JOptionPane.showMessageDialog(null, "Nota Fiscal foi criada com sucesso!!", "Atenção", JOptionPane.ERROR_MESSAGE);
+           
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possivel abrir o arquivo!", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btEmitirNotaFiscalActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
